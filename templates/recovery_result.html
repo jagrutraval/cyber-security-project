@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Malware Recovery Result</title>
+
+<style>
+
+body{
+
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    color:white;
+    margin:0;
+    padding:0;
+
+}
+
+
+.container{
+
+    width:80%;
+    margin:40px auto;
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px #000;
+
+}
+
+
+
+h1{
+
+    text-align:center;
+    color:#38bdf8;
+
+}
+
+
+
+.status-box{
+
+    background:#020617;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+
+}
+
+
+
+.success{
+
+    color:#22c55e;
+    font-size:20px;
+    font-weight:bold;
+
+}
+
+
+
+.failed{
+
+    color:#ef4444;
+    font-size:20px;
+    font-weight:bold;
+
+}
+
+
+
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+
+}
+
+
+th{
+
+    background:#0ea5e9;
+    padding:12px;
+
+}
+
+
+td{
+
+    padding:12px;
+    border-bottom:1px solid #334155;
+
+}
+
+
+
+
+.download-box{
+
+    margin-top:30px;
+    text-align:center;
+    background:#020617;
+    padding:25px;
+    border-radius:10px;
+
+}
+
+
+
+
+button{
+
+
+    background:#22c55e;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+
+
+}
+
+
+button:hover{
+
+    background:#16a34a;
+
+}
+
+
+
+.back{
+
+
+    display:block;
+    text-align:center;
+    margin-top:30px;
+    color:#38bdf8;
+    text-decoration:none;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+🛡 Malware Recovery Result
+</h1>
+
+
+
+<div class="status-box">
+
+
+<p>Status:</p>
+
+
+{% if result.status == "success" %}
+
+<p class="success">
+
+✔ Recovery Successful
+
+</p>
+
+
+{% else %}
+
+<p class="failed">
+
+✖ Recovery Failed
+
+</p>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+
+<h2>
+Removed Malware Components
+</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>
+Removed File
+</th>
+
+
+</tr>
+
+
+
+{% if result.removed_files %}
+
+
+{% for file in result.removed_files %}
+
+
+<tr>
+
+<td>
+
+{{file}}
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<tr>
+
+<td>
+
+No malware component removed
+
+</td>
+
+</tr>
+
+
+
+{% endif %}
+
+
+
+</table>
+
+
+
+
+
+
+
+{% if result.clean_file %}
+
+
+<div class="download-box">
+
+
+<h2>
+
+Clean File Ready
+
+</h2>
+
+
+<p>
+
+The recovered file has been created successfully.
+
+</p>
+
+
+
+<a href="/download/{{ file_id }}">
+
+
+<button>
+
+⬇ Download Clean File
+
+</button>
+
+
+</a>
+
+
+</div>
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+<a class="back" href="/dashboard">
+
+← Back to Dashboard
+
+</a>
+
+
+
+
+</div>
+
+
+
+</body>
+
+
+</html>

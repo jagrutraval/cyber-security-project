@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Scanning...</title>
+
+<style>
+
+body {
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+
+.loader {
+
+    margin:50px auto;
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    border:12px solid #333;
+
+    border-top:12px solid #00ff99;
+
+    animation:spin 1s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    100% {
+        transform:rotate(360deg);
+    }
+
+}
+
+
+#progress {
+
+    font-size:30px;
+
+    color:#00ff99;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>🛡 Malware Scanner</h1>
+
+
+<div class="loader"></div>
+
+
+<h2>Scanning File...</h2>
+
+
+<div id="progress">
+0%
+</div>
+
+
+
+<script>
+
+function checkStatus(){
+
+    fetch("/scan-status")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+
+        if(data.state == "done")
+        {
+
+            document.getElementById("progress").innerHTML =
+            "100%";
+
+
+            window.location="/report";
+
+        }
+
+
+        else
+        {
+
+            document.getElementById("progress").innerHTML =
+            "Scanning...";
+
+        }
+
+
+    });
+
+
+}
+
+
+setInterval(
+    checkStatus,
+    1000
+);
+
+
+</script>
+
+
+</body>
+
+</html>

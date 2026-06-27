@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Quarantine</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+}
+
+
+table{
+
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+
+}
+
+
+th,td{
+
+    padding:12px;
+    border:1px solid #444;
+    text-align:center;
+
+}
+
+
+th{
+
+    background:#222;
+
+}
+
+
+button{
+
+    padding:8px 12px;
+    cursor:pointer;
+    background:#333;
+    color:white;
+    border:1px solid #555;
+    border-radius:5px;
+
+}
+
+
+button:hover{
+
+    background:#555;
+
+}
+
+
+.malware{
+
+    color:red;
+    font-weight:bold;
+
+}
+
+
+.recovered{
+
+    color:lime;
+    font-weight:bold;
+
+}
+
+
+a{
+
+    color:white;
+    text-decoration:none;
+
+}
+
+
+h1{
+
+    color:#00ffff;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1 align="center">
+Quarantine Manager
+</h1>
+
+
+
+<table>
+
+
+<tr>
+
+<th>ID</th>
+
+<th>Filename</th>
+
+<th>Status</th>
+
+<th>Path</th>
+
+<th>Actions</th>
+
+
+</tr>
+
+
+
+
+{% for file in files %}
+
+
+
+<tr>
+
+
+<td>
+
+{{ file.id }}
+
+</td>
+
+
+
+
+<td>
+
+{{ file.filename }}
+
+</td>
+
+
+
+
+
+<td>
+
+
+
+{% if "Recovered" in file.reason %}
+
+
+<span class="recovered">
+
+RECOVERED
+
+</span>
+
+
+
+{% else %}
+
+
+<span class="malware">
+
+MALWARE
+
+</span>
+
+
+
+{% endif %}
+
+
+
+</td>
+
+
+
+
+
+<td>
+
+{{ file.quarantine_path }}
+
+</td>
+
+
+
+
+
+
+<td>
+
+
+
+{% if "Recovered" in file.reason %}
+
+
+
+<a href="/download/{{ file.id }}">
+
+<button>
+
+Download Clean
+
+</button>
+
+</a>
+
+
+
+{% else %}
+
+
+
+<a href="/recover/{{ file.id }}">
+
+<button>
+
+Try Clean & Recover
+
+</button>
+
+</a>
+
+
+
+{% endif %}
+
+
+
+
+
+
+<a href="/delete/{{ file.id }}">
+
+<button>
+
+Delete
+
+</button>
+
+</a>
+
+
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+
+
+</table>
+
+
+
+
+<br>
+
+
+
+<center>
+
+
+<a href="/">
+
+<button>
+
+Back Dashboard
+
+</button>
+
+</a>
+
+
+
+</center>
+
+
+
+</body>
+
+
+</html>

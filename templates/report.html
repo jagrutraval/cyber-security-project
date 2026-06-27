@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Scan Report</title>
+
+<style>
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+}
+
+
+.card{
+
+background:#1e293b;
+padding:20px;
+margin:20px;
+border-radius:15px;
+
+}
+
+
+.safe{
+color:#22c55e;
+}
+
+
+.danger{
+color:#ef4444;
+}
+
+
+button{
+
+padding:10px;
+border-radius:10px;
+background:#2563eb;
+color:white;
+border:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>🛡 Malware Scan Report</h1>
+
+
+
+<div class="card">
+
+<h2>📄 File Information</h2>
+
+<p>
+<b>Name:</b>
+{{ filename }}
+</p>
+
+
+<p>
+<b>Size:</b>
+{{ size }} bytes
+</p>
+
+
+<p>
+<b>SHA256:</b>
+{{ hash }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>🦠 Antivirus Scan</h2>
+
+
+<p>
+{{ scan }}
+</p>
+
+
+<pre>
+{{ details }}
+</pre>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>🔍 YARA Scan</h2>
+
+
+<p>
+
+{{ yara }}
+
+</p>
+
+
+<pre>
+
+{{ yara_details }}
+
+</pre>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>⚠ Risk Score</h2>
+
+
+<h1>
+
+{{ risk_score }}
+
+</h1>
+
+
+<h2>
+
+{{ risk_level }}
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>🤖 AI Security Explanation</h2>
+
+
+<p>
+
+{{ ai_message }}
+
+</p>
+
+
+<p>
+
+{{ ai_advice }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>📦 Extracted Files Scan</h2>
+
+
+{% if extracted %}
+
+
+<ul>
+
+{% for file in extracted %}
+
+<li>
+
+{{ file }}
+
+</li>
+
+{% endfor %}
+
+
+</ul>
+
+
+{% else %}
+
+
+<p>No extracted files</p>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+<a href="/">
+
+<button>
+
+Scan Another File
+
+</button>
+
+</a>
+
+
+
+</body>
+
+</html>

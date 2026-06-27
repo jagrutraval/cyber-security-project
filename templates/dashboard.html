@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Security Dashboard</title>
+
+
+<style>
+
+body{
+
+    margin:0;
+    font-family:Arial;
+    background:#111;
+    color:white;
+
+}
+
+
+/* NAVBAR */
+
+.navbar{
+
+    background:#222;
+    padding:15px;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+
+}
+
+
+.navbar a{
+
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    padding:8px 15px;
+    border-radius:5px;
+
+}
+
+
+.navbar a:hover{
+
+    background:#444;
+
+}
+
+
+
+/* TITLE */
+
+h1{
+
+text-align:center;
+
+}
+
+
+
+/* CARDS */
+
+
+.container{
+
+text-align:center;
+
+}
+
+
+.card{
+
+display:inline-block;
+
+padding:25px;
+
+margin:15px;
+
+width:180px;
+
+background:#333;
+
+border-radius:12px;
+
+}
+
+
+.safe{
+
+background:green;
+
+}
+
+
+.risk{
+
+background:red;
+
+}
+
+
+.quarantine{
+
+background:orange;
+
+color:black;
+
+}
+
+
+.recovered{
+
+background:#008000;
+
+}
+
+
+
+/* TABLE */
+
+
+table{
+
+width:90%;
+
+margin:auto;
+
+border-collapse:collapse;
+
+}
+
+
+th,td{
+
+padding:12px;
+
+border:1px solid #555;
+
+text-align:center;
+
+}
+
+
+th{
+
+background:#222;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- NAVIGATION BAR -->
+
+<div class="navbar">
+
+
+<a href="/">
+
+🔍 Scan
+
+</a>
+
+
+<a href="/history">
+
+📜 History
+
+</a>
+
+
+
+<a href="/dashboard">
+
+🏠 Dashboard
+
+</a>
+
+
+
+<a href="/quarantine">
+
+🛡 Quarantine
+
+</a>
+
+
+
+<a href="/logout">
+
+🚪 Logout
+
+</a>
+
+
+</div>
+
+
+
+
+
+<h1>
+
+🛡 Malware Analyzer Dashboard
+
+</h1>
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+<h2>
+
+{{total}}
+
+</h2>
+
+<p>
+
+Total Scans
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="card safe">
+
+<h2>
+
+{{safe}}
+
+</h2>
+
+<p>
+
+Safe Files
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="card risk">
+
+<h2>
+
+{{malware_count}}
+
+</h2>
+
+<p>
+
+Malware Detected
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="card quarantine">
+
+<h2>
+
+{{quarantined}}
+
+</h2>
+
+<p>
+
+Quarantined
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="card recovered">
+
+<h2>
+
+{{recovered_count}}
+
+</h2>
+
+<p>
+
+Recovered Files
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<h2 style="text-align:center">
+
+Recent Scans
+
+</h2>
+
+
+
+<table>
+
+
+<tr>
+
+<th>
+
+File
+
+</th>
+
+
+<th>
+
+Risk
+
+</th>
+
+
+<th>
+
+Date
+
+</th>
+
+
+</tr>
+
+
+
+
+
+{% for scan in recent %}
+
+
+<tr>
+
+
+<td>
+
+{{scan.filename}}
+
+</td>
+
+
+
+<td>
+
+{{scan.risk_level}}
+
+</td>
+
+
+
+<td>
+
+{{scan.scan_date}}
+
+</td>
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+
+</body>
+
+
+</html>
